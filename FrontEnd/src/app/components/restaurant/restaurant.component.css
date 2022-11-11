@@ -1,0 +1,82 @@
+ .banner {
+     background-image: url('http://source.unsplash.com/800x400/?food');
+     height: 500px;
+     position: static;
+     overflow-x: hidden;
+      background-size: cover;
+     background-position: center center;
+ }
+
+ .search-container {
+     display: flex;
+     justify-content: center;
+     padding: 5px;
+     margin: 15px;
+     position: static;
+     text-align: center;
+ }
+
+ .content {
+     top: 8%;
+     left: 20%;
+     position: static;
+     margin: 20px;
+ }
+
+ .content h1 {
+     color: rgb(19, 19, 20);
+     font-size: 40px;
+     font-weight: bold;
+     font-family: 'Merriweather', serif;
+ }
+
+ img h1 {
+     font-weight: bold;
+     color: rgb(19, 19, 20);
+ }
+
+ .container {
+     border-radius: 10px;
+ }
+
+ .body{
+     background-color: rgb(237, 227, 227);
+ }
+
+ .row img {
+     border-radius: 5px;
+     width: 200px;
+     height: 180px;
+     margin-bottom: 15px;
+     transition: 0.3s ease-in-out;
+ }
+
+ .row img:hover {
+     transition: 0.3s ease-in-out;
+     transform: scale(1.1);
+     cursor: pointer;
+ }
+
+ mat-card-actions>button {
+     margin: 5px;
+ }
+
+ select option {
+     text-align: start;
+ }
+
+ :host /deep/ .mat-form-field-label-wrapper .mat-form-field-label {
+    background-origin: padding-box;
+    background-color: rgb(18, 19, 8);
+    color : whitesmoke;
+    font-size: large;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: .6em;
+}
+.mat-form-field-label {
+    top: 12px;
+}
+.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label{
+  top:18px;
+}

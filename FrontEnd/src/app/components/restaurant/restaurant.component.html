@@ -1,0 +1,117 @@
+<div class="banner">
+    <div class="search-container d-flex ">
+        <div>
+           <select  class="btn-lg btn-primary  dropdown" (change)="selectChangeHandler($event)"
+           style="margin-top: 40%;position: static;background-color: rgb(21, 137, 221);margin-left: -40%;" (click)="getByLocation(locationText)">
+               <option>Select your Location</option>
+               <option value="0">View All</option>
+               <option>Chandigarh</option>
+               <option>Himachal Pradesh</option>
+               <option>Punjab</option>
+               <option>Rajasthan</option>
+               <option>Jaipur</option>
+               <option>New Delhi</option>
+               <option>Mumbai</option>
+               <option>Bengaluru</option>
+               <option>Goa</option>
+           </select>
+       </div> 
+
+       <div>
+           <form class="search-bar" style="margin-top: 19%;margin-left:10%;">
+               <mat-form-field class="example-full-width" style="width: 400px; margin:0 24px;">
+                   <span matPrefix> </span>
+                   <input type="text" matInput placeholder="Search for Restaurant and Cuisine" name="search"
+                       [(ngModel)]="searchBarText">
+                   <button matSuffix mat-button>
+                       <mat-icon>search</mat-icon>
+                   </button>
+               </mat-form-field>
+           </form>
+       </div>
+   </div>
+</div>
+<div class="body">
+    
+
+    <!-- Container to display all the restaurants and can do filter  -->
+    <div *ngIf="(allRestaurants | filter : searchBarText) as result">
+        <div *ngIf="result.length == 0" class="text-center">
+          <img src=".//src//assets//norecords.png" >
+        </div>
+    </div>
+    <div class="container mt-4 mb-4 darkMode" *ngIf="disableAll">
+        <div class="row">
+            <div class="box col-lg-3 mt-3" *ngFor="let item of allRestaurants | filter : searchBarText | paginate: { id: 'list_pagination',
+        itemsPerPage: 8,
+        currentPage: page,
+        totalItems: totalRecords }">
+                <img (click)="getData(item)" src=".//src//assets//Restaurants//{{item.restaurantImage}}">
+                <mat-card-content>
+                    <mat-card-title>
+                        <h1 mat-sort-header (click)="getData(item)">{{item.restaurantName}}</h1>
+                    </mat-card-title>
+                    <p>Location : {{item.location}}</p>
+                    <p *ngIf="item.rating >= 4">Rating : <strong class="badge text-black "
+                            style="background-color: green;">
+                            {{item.rating}}☆</strong>
+                    <p *ngIf="item.rating >= 3 && item.rating < 4">Rating : <strong class="badge text-black "
+                            style="background-color: gold;"> {{item.rating}}☆</strong>
+                    <p *ngIf="item.rating >= 1 && item.rating < 3">Rating : <strong class="badge text-black "
+                            style="background-color: red;"> {{item.rating}}☆</strong>
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" (click)="addToFavourites(item)">
+                        <mat-icon>favorite</mat-icon>
+                    </button>
+                    <button mat-raised-button color="primary" (click)="getData(item)">View</button>
+                </mat-card-actions>
+            </div>
+        </div>
+        <!-- <div style="padding: 20px;">
+            <pagination-controls class="text-center" id="list_pagination" (pageChange)=" page = $event">
+            </pagination-controls>
+        </div> -->
+    </div>
+
+    <!--  Container to display all the restaurants by locations -->
+    <div class="container mt-4 mb-4" *ngIf="disableLocation">
+        <div class="row">
+            <div class="box col-lg-3 mt-3" *ngFor="let item of restaurantsByLocation | filter : searchBarText  | paginate: { id: 'list_pagination1',
+        itemsPerPage: 8,
+        currentPage: page,
+        totalItems: totalRecordsByLocation }">
+
+                <img (click)="getData(item)" src=".//src//assets//Restaurants//{{item.restaurantImage}}" alt="">
+                <mat-card-content>
+                    <mat-card-title>
+                        <h1 mat-sort-header (click)="getData(item)">{{item.restaurantName}}</h1>
+                    </mat-card-title>
+                    <p>Location : {{item.location}}</p>
+                    <p *ngIf="item.rating >= 4">Rating : <strong class="badge text-black "
+                            style="background-color: green;">
+                            {{item.rating}}☆</strong>
+                    <p *ngIf="item.rating >= 3 && item.rating < 4">Rating : <strong class="badge text-black "
+                            style="background-color: gold;"> {{item.rating}}☆</strong>
+                    <p *ngIf="item.rating >= 1 && item.rating < 3">Rating : <strong class="badge text-black "
+                            style="background-color: red;"> {{item.rating}}☆</strong>
+                    </p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button id="btn" mat-raised-button color="accent" (click)="addToFavourites(item)">
+                         <mat-icon>favorite</mat-icon> 
+                        
+                    </button>
+                    <button mat-raised-button color="primary" (click)="getData(item)">View</button>
+                </mat-card-actions>
+            </div>
+
+        </div>
+        <div style="padding: 20px;">
+            <pagination-controls class="text-center" id="list_pagination1" (pageChange)=" page = $event">
+            </pagination-controls>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,129 @@
+<mat-toolbar>
+  <mat-toolbar-row style="background-color: rgba(245, 230, 223, 0.877)">
+
+    <div class="mat-toolbar-brand aligin-item-centre d-flex">
+      <!-- <mat-icon routerLink="/restaurant">restaurant</mat-icon>
+      &nbsp; &nbsp; &nbsp;<span class="food">Foodie App</span> -->
+      <mat-icon routerLink="/restaurant">restaurant</mat-icon>
+      &nbsp; &nbsp; &nbsp;<span class="food"><a routerLink='' 
+        style="text-decoration: none;color: black;">Foodie App</a></span>
+    </div>
+    <div class="space"></div>
+
+    <button mat-icon-button style="margin:0px 10px;">
+      <mat-icon routerLink="/cart" color="warn">shopping_cart</mat-icon>
+    </button>
+
+
+    <button mat-icon-button style="margin:0px 10px;">
+      <mat-icon routerLink="/favourite" color="warn">favorite</mat-icon>
+    </button>
+
+    <div class="buttons" *ngIf="login_SignUpButton">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+      data-bs-target="#exampleModal" >Login</button>
+
+      <button type="button" class="btn btn-success" routerLink="/signup">signup</button>
+    </div>
+
+    <div class="profile-container d-flex" *ngIf="profileButton" style="margin: 0 5px;padding:1rem">
+      <button mat-icon-button [matMenuTriggerFor]="menu" >
+
+        <img height="40px" width="40px" style="border-radius: 20px;margin-left: 5px;"
+          [src]="profileUrl ?? './/src//assets//avatar.webp' ">
+      </button>
+
+      <h1 style="color: black;">Hi, {{userName}} </h1>
+
+      <mat-menu #menu="matMenu" >
+        <button mat-menu-item>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">Profile</button>
+        </button>
+        <button mat-menu-item>
+          <button type="button" class="btn btn-success" (click)="logoutUser()" style="background-color: red;">Logout</button>
+        </button>
+        <button mat-menu-item>
+          <button type="button" class="btn btn-success" (click)="goToAdmin()">Admin</button>
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- Modal for login Form -->
+<div class="modal " id="exampleModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h2 class="modal-title text-center" id="exampleModalLabel">Hello There..!</h2>
+        <button type="button" #myModalClose class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="loginForm" (ngSubmit)="loginUser()" action="#">
+          <div class="text-center">
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="email" formControlName="emailId">
+              <mat-icon matSuffix>mail</mat-icon>
+              <mat-hint>
+                <p> We'll never share your email with anyone </p>
+              </mat-hint>
+
+              <mat-error *ngIf="emailId.hasError('required')">
+                EmailId is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="text-center">
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" placeholder="password" formControlName="password">
+              <mat-icon matSuffix>lock</mat-icon>
+
+              <mat-error *ngIf="password.hasError('required')">
+                Password is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-danger" [disabled]="loginForm.invalid">Login</button>
+          </div>
+          <p class="text-center  mt-4 ">New To FoodieApp?<a class="fw-bold text-body"
+              data-bs-dismiss="modal" routerLink="/signup"><u>Create an
+                Account</u></a></p>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for uploading the profile picture -->
+<div class="modal " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" style="font-size: 40px;font-family: 'Lobster', cursive;" id="staticBackdropLabel">Hello
+          {{userName}} </h3>
+
+        <button type="button" #myModalClose class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <h2>Upload Profile picture Here</h2>
+        <div class="profile-image">
+          <img height="140px" width="140px" [src]="profileUrl ?? './/src//assets//avatar.webp' ">
+        </div>
+        <div style="margin: 10px 0px;">
+
+          <input type="file" (change)="saveProfile($event)">
+
+        </div>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="onUpload()">Upload</button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>

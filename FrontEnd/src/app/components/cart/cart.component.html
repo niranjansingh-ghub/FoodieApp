@@ -1,0 +1,62 @@
+<ng-container *ngIf="favCuisinesList !=0 && afterLogin">
+    <div class="container mt-4 mb-4" >
+        <div class="row">
+            <div class="box col-lg-3 mt-3" *ngFor="let item of favCuisinesList | paginate: { id: 'list_pagination',
+            itemsPerPage: 8,
+            currentPage: page,
+    
+        totalItems: totalRecordsForRestaurant }">
+                <img src=".//src//assets//Cuisines//{{item.cuisineImage}}" alt="">
+                <mat-card-content>
+                    <mat-card-title>
+                        <h1 mat-sort-header>{{item.cuisineName}}</h1>
+                        <p>{{item.price}} Rs</p>
+                    </mat-card-title>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button (click)="deleteFavCuisine(item.cuisineId)">
+                        <mat-icon color="warn">delete</mat-icon>
+                    </button>
+                </mat-card-actions>
+            </div>
+        </div>
+        <div style="padding: 20px;">
+            <pagination-controls class="text-center" id="list_pagination" (pageChange)=" page = $event">
+            </pagination-controls>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="afterLogin">
+<div class="content text-center">
+    <button mat-button style="margin-right: 10px;background-color: blue;color: aliceblue;" (click)="placeOrder()"
+      class="btn btn-primary"> Place Order
+    </button>
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="restaurantLength == 0 && cuisineLength == 0 ">
+    <div class="empty-container">
+        <div class="card">
+        </div>
+        <div class="center">
+            <img src=".//src//assets//emptycart.png" alt="">
+            <h4>Add Items to it now</h4>
+            <button routerLink="/restaurant" class="btn btn-primary">Add Now</button>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="beforeLogin">
+    <div class="empty-container">
+        <div class="card">
+        </div>
+        <div class="center">
+            <img src=".//src//assets//emptycart.png" alt="">
+            <h4>Please login to see your Cart</h4>
+            <button class="btn btn-primary" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">Login now</button>
+        </div>
+    </div>
+</ng-container>

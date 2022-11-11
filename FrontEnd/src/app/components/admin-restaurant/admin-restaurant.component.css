@@ -1,0 +1,53 @@
+.container1{
+    border: 1px solid gray;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.item img {
+    width: 64px;
+    height: 64px;
+}
+
+.item {
+    margin: 0px 15px;
+    text-align: center;
+}
+
+.item a:hover {
+    color: blue;
+}
+
+.card {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.body{
+    background-image: url('http://source.unsplash.com/800x400/?food');
+    background-size: cover;
+    background-position: center center;
+    width: 100%;
+    height: 90%;
+}
+
+.row img {
+    border-radius: 5px;
+    width: 170px;
+    height: 180px;
+    margin-bottom: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+.row img:hover {
+    transition: 0.3s ease-in-out;
+    transform: scale(1.1);
+}
+
+h1 {
+    font-size: 25px;
+    font-weight: bolder;
+    font-family: 'Roboto Mono', monospace;
+    color: #121212;
+}

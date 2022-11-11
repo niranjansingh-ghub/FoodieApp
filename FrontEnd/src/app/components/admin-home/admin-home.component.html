@@ -1,0 +1,86 @@
+<div class="body-container">
+
+  <div class="content text-center">
+    <button mat-button style="margin-right: 10px;background-color: blue;color: aliceblue;" (click)="openForm()"
+      class="btn btn-primary"> Add Restaurant <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="container mt-4 mb-4" *ngIf="viewAllRestaurants">
+    <div class="row">
+      <div class="box col-lg-3 mt-3" *ngFor="let item of allRestaurants  | paginate: {
+        id: 'list_pagination',
+        itemsPerPage: 8,
+        currentPage: page,
+        totalItems: totalRecords }">
+
+        <img src=".//src//assets//Restaurants//{{item.restaurantImage}}">
+        <mat-card-content>
+          <mat-card-title>
+            <h1 mat-sort-header>{{item.restaurantName}}</h1>
+          </mat-card-title>
+          <p>Location : {{item.location}}</p>
+          <p>Rating : <strong class="badge text-black " style="background-color: gold;"> {{item.rating}}☆</strong>
+          </p>
+        </mat-card-content>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary">
+            <mat-icon (click)="addCuisine(item)">mode_edit</mat-icon>
+          </button>
+          <button mat-raised-button color="warn">
+            <mat-icon  (click)="deleteRestaurant(item.restaurantId)">delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </div>
+    </div>
+    <div style="padding: 20px;">
+      <pagination-controls class="text-center" id="list_pagination" (pageChange)=" page = $event">
+      </pagination-controls>
+    </div>
+  </div>
+
+  <div class="container-fluid" *ngIf="viewAddRestaurants">
+    <div class="card">
+      <div class="card-header bg-success">
+        <h2>Add Restaurant Here</h2>
+      </div>
+      <div class="card-body ">
+        <form [formGroup]="restaurantForm">
+          <div style="margin-top: 100px;">
+              <h1 style="margin-left:4%">Register</h1>
+              <div class="form-group">
+                  <mat-form-field style="width: 250px; margin-left: 10px;"class="example-full-width" appearance="outline">
+                    <input required type="number"  name="restaurantId" [(ngModel)]="restaurant.restaurantId"  matInput placeholder="Enter Restaurant Id" formControlName="restaurantId">
+                  </mat-form-field>
+              </div>
+              <div class="form-group">
+                  <mat-form-field style="width: 250px; margin-left: 10px;"class="example-full-width" appearance="outline">
+                    <input required type="text"  name="restaurantName" [(ngModel)]="restaurant.restaurantName"  matInput placeholder="Enter Restaurant Name" formControlName="restaurantName">
+                   
+                  </mat-form-field>
+              </div>
+              <div class="form-group">
+                  <mat-form-field style="width: 250px; margin-left: 10px;"class="example-full-width" appearance="outline">
+                    <input type="text"  name="location" [(ngModel)]="restaurant.location" matInput placeholder="Enter Location" formControlName="location">
+                   
+                  </mat-form-field>
+              </div>
+              <div class="form-group">
+                <mat-form-field style="width: 250px; margin-left: 10px;"class="example-full-width" appearance="outline">
+                  <input type="text"  name="restaurantImage" [(ngModel)]="restaurant.restaurantImage" matInput placeholder="Enter Image name" formControlName="restaurantImage">
+                 
+                </mat-form-field>
+                <div class="form-group">
+                  <mat-form-field style="width: 250px; margin-left: 10px;"class="example-full-width" appearance="outline">
+                    <input required type="number"  name="rating" [(ngModel)]="restaurant.rating"  matInput placeholder="Enter Restaurant Rating" formControlName="rating">
+                  </mat-form-field>
+              </div>
+            </div>
+           <button [disabled]="restaurantForm.status === 'INVALID'" type="submit" style="margin-left: 10px;"  mat-stroked-button color="primary" (click)="saveRestaurant()">Add</button>
+           <button type="submit" style="margin-left: 10px;"  mat-stroked-button color="primary" (click)="closeForm()">Close</button>  
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

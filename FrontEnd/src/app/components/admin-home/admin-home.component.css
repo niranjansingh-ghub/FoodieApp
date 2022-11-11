@@ -1,0 +1,51 @@
+.container {
+    border-radius: 10px;
+}
+
+.row img {
+    border-radius: 5px;
+    width: 200px;
+    height: 180px;
+    margin-bottom: 15px;
+    transition: 0.3s ease-in-out;
+}
+
+.row img:hover {
+    transition: 0.3s ease-in-out;
+    transform: scale(1.1);
+}
+
+mat-card-actions>button {
+    margin: 5px;
+}
+
+.content {
+    margin: 20px;
+}
+
+.container-fluid {
+    margin: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid gold;
+}
+
+.form-group {
+    margin: 10px 0;
+}
+
+button {
+    position: static;
+}
+
+.text-center button {
+
+    width: 200px;
+    margin-top: 10px;
+    border-radius: 20px;
+}

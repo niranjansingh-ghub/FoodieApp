@@ -1,0 +1,54 @@
+<div class="container1">
+<div class="row">
+    <form [formGroup]="cuisineForm">
+        <div style="display:flex;justify-content: space-around;">
+            <div>
+                <mat-form-field>
+                    <input type="text" matInput formControlName="cuisineName" placeholder="Item Name">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input type="text" matInput formControlName="cuisineImage" placeholder="Item Image">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input type="number" matInput formControlName="price" placeholder="Price">
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-button style= "background-color: blue;color: aliceblue;"(click)="addCuisine(restauratantInfo.restaurantId)">Add Cuisine</button>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+<div class="body">
+    <div class="container restauratantInfo">
+        <div class="row">
+            <ng-container>
+                <div class="card col-lg-2 mt-2">
+                    <img src=".//src//assets//Restaurants//{{restauratantInfo.restaurantImage}}" alt="">
+
+                    <h1>{{restauratantInfo.restaurantName}} Restaurant</h1>
+                    <p>{{restauratantInfo.location}}</p>
+                    <p>Rating : <small class="badge bg-info text-white">{{restauratantInfo.rating}}☆</small> </p>
+                </div>
+                
+            <ng-container *ngFor="let item of restauratantInfo.cuisine">
+              <div class="card col-lg-2 ">
+                <h1>{{item.cuisineName}}</h1>
+                  <img src=".//src//assets//Cuisines//{{item.cuisineImage}}" >
+                  <p>{{item.price}} Rs</p>
+                   <button mat-raised-button color="warn" (click)="removeCuisine(restauratantInfo.restaurantId,item.cuisineName)"
+                    class="text-center" style="width: 1cm;">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</div>

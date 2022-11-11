@@ -1,0 +1,78 @@
+ version: "3.3"
+ services:
+   mysqlservice:
+     image: mysql:5.5
+     ports:
+       - 3306:3306
+     container_name: mysql-container
+     network_mode: host
+     hostname: localhost
+     environment:
+       MYSQL_ROOT_PASSWORD: root
+       MYSQL_USERNAME: root
+       MYSQL_PASSWORD: root
+       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+   mongodbservice:
+     image: mongo:latest
+     container_name: mongo-container
+     network_mode: host
+     hostname: localhost
+     ports:
+       - 27017:27017
+
+   eurekaservermodule:
+     container_name: eureka-server-module
+     build: EurekaServerModule/
+     hostname: localhost
+     network_mode: host
+     ports:
+       - 8761:8761
+
+   apigatewaymodule:
+     container_name: api-gateway-module
+     build: APIGatewayModule/
+     hostname: localhost
+     network_mode: host
+     ports:
+       - 9000:9000
+     depends_on:
+       - eurekaservermodule
+
+   userauthenticationservice:
+     container_name: user-authentication-service
+     build: UserAuthenticationService/
+     hostname: localhost
+     network_mode: host
+     ports:
+       - 8080:8080
+     depends_on:
+       - mysqlservice
+       - apigatewaymodule
+       - eurekaservermodule
+#     restart: always
+
+   restaurantservice:
+     container_name: restaurant-service
+     build: RestaurantService/
+     hostname: localhost
+     network_mode: host
+     ports:
+       - 8081:8081
+     depends_on:
+       - mongodbservice
+       - apigatewaymodule
+       - eurekaservermodule
+#     restart: always
+   favouriteservice:
+     container_name: favourite-service
+     build: FavouriteService/
+     hostname: localhost
+     network_mode: host
+     ports:
+       - 8082:8082
+     depends_on:
+       - mongodbservice
+       - apigatewaymodule
+       - eurekaservermodule
+

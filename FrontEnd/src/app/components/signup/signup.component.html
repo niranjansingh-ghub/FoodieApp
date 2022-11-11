@@ -1,0 +1,79 @@
+<div class="body">
+    <div class="container h-100">
+        <div class="row  justify-content-center align-items-center ">
+            <div class="card">
+              <div class="card-body p-2">
+                <h2 class="text text-center mb-3">Sign Up</h2>
+                <hr>
+
+                <form [formGroup]="signUpForm" (ngSubmit)="saveUser()">
+                    <mat-form-field class="full-width" appearance="outline">
+                      <mat-label>FullName</mat-label>
+                      <input type="text" matInput placeholder="fullName" formControlName ="fullName">
+
+                      <mat-error *ngIf="fullName.errors?.['minlength'] && !fullName.errors?.['required']">
+                        Please enter atleast 3 letters
+                      </mat-error>
+                      <mat-error *ngIf="fullName.hasError('required')">
+                        FullName is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="emailId" placeholder="Ex. name@domain.com">
+                    <mat-error *ngIf="emailId.hasError('email') && !emailId.hasError('required')">
+                      Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="emailId.hasError('required')">
+                      Email is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>MobileNo</mat-label>
+                    <input type="tel" matInput placeholder="Mobile No" formControlName="mobileNo">
+
+                    <mat-error *ngIf="mobileNo.errors?.['minlength']&& !mobileNo.hasError('required')">
+                      Please Enter Minimum 10 digits
+                    </mat-error>
+
+                    <mat-error *ngIf="mobileNo.errors?.['maxlength']&& !mobileNo.hasError('required')">
+                      maximum 10 digits Only
+                    </mat-error>
+
+                    <mat-error *ngIf="mobileNo.hasError('required')">
+                      Mobile No is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
+
+                    <mat-form-field class="full-width" appearance="outline">
+                      <mat-label>Password</mat-label>
+                      <input type="password" matInput placeholder="password" formControlName ="password">
+
+                      <mat-error *ngIf="password.hasError('required')">
+                        Password is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width" appearance="outline">
+                      <mat-label>Confirm Password</mat-label>
+                      <input type="password" matInput placeholder="confirmPassword" formControlName ="confirmPassword">
+
+                      <mat-error *ngIf="confirmPassword.hasError('required')">
+                       Confirm Password is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-success " [disabled]="signUpForm.invalid">SignUp</button>
+                  </div>
+
+                  <p class="text-center  mt-3 mb-0">Have already an account?<a href="#!"
+                    class="fw-bold text-body" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" ><u>Login here</u></a></p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>

@@ -1,0 +1,28 @@
+.card {
+    background-image: linear-gradient(rgb(88, 143, 226), rgb(255, 255, 255));
+    border-radius: 20px;
+    width: 380px;
+    margin-top: 80px;
+    margin-bottom: 90px;
+    padding: 10px;
+}
+
+label, h2 {
+    color: black;
+}
+
+.body {
+    background-image: url('http://source.unsplash.com/1600x800/?food');
+    background-size: cover contain;
+    background-position: center center;
+}
+
+button {
+    width: 200px;
+    margin-top: 10px;
+    border-radius: 20px;
+}
+
+.full-width {
+    width: 90%;
+}

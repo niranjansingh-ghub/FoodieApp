@@ -1,0 +1,56 @@
+ mat-toolbar {
+   position: sticky;
+   top: 0;
+ }
+
+ .space {
+   flex: 1 1 auto;
+ }
+
+ .btn {
+   margin: 0 10px;
+   border-radius: 7px;
+   width: 3cm;
+ }
+
+ mat-icon {
+   font-size: 40px;
+   color: rgb(207, 79, 79);
+ }
+
+ a {
+   cursor: pointer;
+ }
+
+ .card {
+   border-radius: 40px;
+   width: 380px;
+ }
+
+ .full-width {
+   width: 90%;
+ }
+
+ .modal {
+   margin-top: 200px;
+   border-radius: 20px;
+ }
+
+ .profile-image>img {
+   border-radius: 100px;
+   object-fit: cover;
+   object-position: center;
+ }
+
+ h1 {
+   color: bisque;
+   display: flex;
+   margin: 5px 0 0 20px;
+   font-size: 1.6rem;
+   font-family: 'Merriweather', serif;
+ }
+
+ .food {
+  color: black;
+  font-size: larger;
+ }
